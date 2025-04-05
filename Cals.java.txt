@@ -1,0 +1,95 @@
+import java.util.*;
+public class Cals {
+
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+		Scanner scanner=new Scanner(System.in); //for user input
+		
+		while(true)
+		{
+			
+		
+		System.out.println("Enter the First input:");
+		double input1=scanner.nextDouble(); 
+		
+		System.out.println("Enter the operator (+,-,*,/) :");
+		char operator=scanner.next().charAt(0);
+		
+		System.out.println("Enter the Second input:");
+		double input2=scanner.nextDouble();
+		
+		double Result;
+		
+		switch(operator)
+		{
+		case '+':
+			Result = input1+input2;
+			System.out.println(Result);
+			break;
+			
+		case '-':
+			Result=input1-input2;
+			System.out.println(Result);
+			break;
+			
+		case '*':
+			Result=input1*input2;
+			System.out.println(Result);
+			break;
+			
+		case '/':
+			if(input2!=0)
+			{
+				Result=input1/input2;
+				System.out.println(Result);
+				
+			}
+			else
+			{
+				System.out.println("Error: Division by zero is not allowed");
+			}
+			break;
+			
+			default:
+				System.out.println("invalid operator");
+			//continue;
+				
+		}
+		
+		
+		//scanner.close();
+
+	}
+	}
+}
+/*
+The main issue is that continue; is used incorrectly. The continue statement can only be used inside loops (for, while, or do-while). However, your switch-case is not inside a loop, so using continue; results in a compilation error.
+Example Runs
+✅ Example 1: Addition
+
+Enter first number: 10
+Enter operator (+, -, *, /): +
+Enter second number: 5
+Result: 15.0
+✅ Example 2: Division
+
+Enter first number: 20
+Enter operator (+, -, *, /): /
+Enter second number: 4
+Result: 5.0
+❌ Example 3: Division by Zero
+
+Enter first number: 8
+Enter operator (+, -, *, /): /
+Enter second number: 0
+Error: Division by zero is not allowed!
+
+Key Concepts Used
+🔹 Variables: num1, num2, operator, result
+🔹 User Input: Scanner class
+🔹 Conditional Statements: switch-case for operation selection
+🔹 Error Handling: Prevents division by zero
+
+This Basic Calculator is a great beginner-friendly project to practice Java fundamentals!
+*/

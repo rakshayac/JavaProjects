@@ -1,0 +1,99 @@
+import java.util.Scanner;
+
+public class Scientific_Calculator {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("\n// Scientific Calculator");
+            System.out.println("1. Addition (+)");
+            System.out.println("2. Subtraction (-)");
+            System.out.println("3. Multiplication (*)");
+            System.out.println("4. Division (/)");
+            System.out.println("5. Square Root (√x)");
+            System.out.println("6. Power (x^y)");
+            System.out.println("7. Logarithm (log10)");
+            System.out.println("8. Sine (sin)");
+            System.out.println("9. Cosine (cos)");
+            System.out.println("10. Tangent (tan)");
+            System.out.println("11. Exit");
+            System.out.print("Enter the Choice (1-11): ");
+
+            int choice = sc.nextInt();
+
+            if (choice == 11) {
+                System.out.println("Exiting calculator. Goodbye!");
+                break;
+            }
+            if (choice < 1 || choice > 11) {
+                System.out.println("Invalid choice! Please enter a number between 1 and 11.");
+                continue; // Restart the loop
+            }
+
+            double input1 = 0, input2 = 0, result = 0;
+
+            // Read first number
+            System.out.print("Enter first number: ");
+            input1 = sc.nextDouble();
+
+            // Read second number if needed
+            if (choice >= 1 && choice <= 4 || choice == 6) {
+                System.out.print("Enter second number: ");
+                input2 = sc.nextDouble();
+            }
+
+            switch (choice) {
+                case 1:
+                    result = input1 + input2;
+                    break;
+                case 2:
+                    result = input1 - input2;
+                    break;
+                case 3:
+                    result = input1 * input2;
+                    break;
+                case 4:
+                    if (input2 != 0) {
+                        result = input1 / input2;
+                    } else {
+                        System.out.println("Error: Division by zero is not allowed.");
+                        continue;
+                    }
+                    break;
+                case 5:
+                    if (input1 >= 0) {
+                        result = Math.sqrt(input1);
+                    } else {
+                        System.out.println("Error: Cannot calculate square root for negative numbers.");
+                        continue;
+                    }
+                    break;
+                case 6:
+                    result = Math.pow(input1, input2);
+                    break;
+                case 7:
+                    if (input1 > 0) {
+                        result = Math.log10(input1);
+                    } else {
+                        System.out.println("Error: Logarithm of non-positive number is undefined.");
+                        continue;
+                    }
+                    break;
+                case 8:
+                    result = Math.sin(Math.toRadians(input1));
+                    break;
+                case 9:
+                    result = Math.cos(Math.toRadians(input1));
+                    break;
+                case 10:
+                    result = Math.tan(Math.toRadians(input1));
+                    break;
+                default:
+                    System.out.println("Invalid choice! Please enter a number between 1 and 11.");
+                    continue;
+            }
+            System.out.println("Result: " + result);
+        }
+        sc.close();
+    }
+}
