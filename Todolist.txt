@@ -1,0 +1,151 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Task
+{
+	String description;
+	boolean isCompleted;
+	
+	public Task(String description) 
+	{
+		this.description = description;
+		this.isCompleted = false;
+	}
+	void markasCompleted()
+	{
+		this.isCompleted=true;
+	}
+	public String toString()
+	{
+		//return (isCompleted ? "Done " : "NotDone ")+description;
+		if(isCompleted==true)
+		{
+			return "Done " +description;
+		}
+		else
+		{
+			return "Not Done " +description;
+		}
+	}
+
+}
+public class Todolist 
+{
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+		Scanner sc=new Scanner(System.in);
+		ArrayList<Task> tasks=new ArrayList<>();
+		
+		while(true)
+		{
+			System.out.println("To-do-List");
+			System.out.println("1. Add Task");
+			System.out.println("2. view Tasks");
+			System.out.println("3. Mark Task as completed");
+			System.out.println("4. Remove Task");
+			System.out.println("5. Exit");
+			System.out.println("Enter choice (1-5)");
+			
+			int choice=sc.nextInt();
+			sc.nextLine();
+			
+			switch(choice)
+			{
+			case 1:
+				System.out.println("Enter task descrition");
+				String desc=sc.nextLine();
+				tasks.add(new Task(desc));
+				System.out.println("Task Add Successfully");
+				break;
+				
+			case 2:
+				if(tasks.isEmpty())
+				{
+					System.out.println("No Tasks available");
+				}
+				else
+				{
+					System.out.println("your Tasks: ");
+					for(int i=0;i<tasks.size();i++)
+					{
+						System.out.println(tasks.get(i));
+					}
+				}
+				break;
+				
+			case 3:
+				System.out.println("Enter the task number to mark as completed");
+				int taskindex=sc.nextInt()-1;
+				if(taskindex>=0 && taskindex<tasks.size())
+				{
+					tasks.get(taskindex).markasCompleted();
+					System.out.println("task marked as completed");
+				}
+				else
+				{
+					System.out.println("Invalid task number");
+				}
+				break;
+				
+			case 4:
+				System.out.println("Enter task number to remove");
+				int removeindex=sc.nextInt();
+				if(removeindex>=0 && removeindex<tasks.size())
+				{
+					tasks.remove(removeindex);
+					System.out.println("Task removed");
+				}
+				else
+				{
+					System.out.println("Invalid task number");
+				}
+				break;
+				
+			case 5:
+				System.out.println("exiting todolist. Goodbye");
+				sc.close();
+				return;
+				
+			default:
+				System.out.println("Invalid choice. choose another ");
+			}
+			
+		}
+	}
+
+}
+/*Your program is behaving as expected because you are inside a while(true) loop.
+
+Why does the menu reappear even though you didn't use continue?
+Every iteration of the loop starts fresh by printing the menu again.
+
+If an invalid choice is entered (case default), it prints "Invalid choice. choose another", and the loop naturally continues to the next iteration.
+
+Since continue is used to skip to the next iteration, but it's not necessary here, the loop will still go to the next iteration after executing the default case.
+
+What happens when you enter an invalid choice (6)?
+switch(choice) does not match any case 1-5, so it executes default.
+
+System.out.println("Invalid choice. choose another"); prints an error message.
+
+The loop naturally continues because there's no break or return to stop it.
+
+The menu reappears.
+
+When is continue needed?
+continue is useful if you have more code after the switch-case and want to skip it.
+
+Example: If you had extra logic after the switch-case, and you only wanted to skip to the next iteration upon an invalid choice.
+
+How to explicitly use continue?
+java
+Copy
+Edit
+default:
+    System.out.println("Invalid choice. Choose another.");
+    continue; // Explicitly skips to the next loop iteration
+Even without continue, the loop already continues to the next iteration in your case.
+
+So, your program is working correctly without it!
+*/

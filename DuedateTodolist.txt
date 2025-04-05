@@ -1,0 +1,101 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class news {
+    String description;
+    boolean isCompleted;
+    String dueDate; // New field for the due date
+
+    public news(String description, String dueDate) {
+        this.description = description;
+        this.isCompleted = false;
+        this.dueDate = dueDate; // Store the due date
+    }
+
+    void markAsCompleted() {
+        this.isCompleted = true;
+    }
+
+    public String toString() {
+        return (isCompleted ? "[Done] " : "[Not Done] ") + description + " (Due: " + dueDate + ")";
+    }
+}
+
+public class DuedateTodolist {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<news> tasks = new ArrayList<>();
+
+        while (true) {
+            System.out.println("\nTo-Do List");
+            System.out.println("1. Add Task");
+            System.out.println("2. View Tasks");
+            System.out.println("3. Mark Task as Completed");
+            System.out.println("4. Remove Task");
+            System.out.println("5. Exit");
+            System.out.print("Enter choice (1-5): ");
+
+            int choice = sc.nextInt();
+            sc.nextLine(); // Consume newline character
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter task description: ");
+                    String desc = sc.nextLine();
+                    System.out.print("Enter due date (YYYY-MM-DD): ");
+                    String dueDate = sc.nextLine(); // Accept due date
+                    tasks.add(new news(desc, dueDate));
+                    System.out.println("Task added successfully!");
+                    break;
+
+                case 2:
+                    if (tasks.isEmpty()) {
+                        System.out.println("No tasks available.");
+                    } else {
+                        System.out.println("Your Tasks:");
+                        for (int i = 0; i < tasks.size(); i++) {
+                            System.out.println((i + 1) + ". " + tasks.get(i));
+                        }
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Enter task number to mark as completed: ");
+                    int taskIndex = sc.nextInt() - 1;
+                    if (taskIndex >= 0 && taskIndex < tasks.size()) {
+                        tasks.get(taskIndex).markAsCompleted();
+                        System.out.println("Task marked as completed.");
+                    } else {
+                        System.out.println("Invalid task number.");
+                    }
+                    break;
+
+                case 4:
+                    System.out.print("Enter task number to remove: ");
+                    int removeIndex = sc.nextInt() - 1;
+                    if (removeIndex >= 0 && removeIndex < tasks.size()) {
+                        tasks.remove(removeIndex);
+                        System.out.println("Task removed.");
+                    } else {
+                        System.out.println("Invalid task number.");
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("Exiting To-Do List. Goodbye!");
+                    sc.close();
+                    return;
+
+                default:
+                    System.out.println("Invalid choice. Choose another.");
+            }
+        }
+    }
+}
+/*When a task is created, it should always start as incomplete.
+ *  So there's no need to ask the user to specify that—it’s set to false by default.
+ */
+
+/*Once a user completes a task, then you use the method markAsCompleted() 
+ * to change isCompleted to true.
+ */
